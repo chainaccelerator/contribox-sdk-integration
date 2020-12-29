@@ -1,73 +1,80 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
     <link rel="stylesheet" href="style.css">
-    <title>Document</title>
+    <title>SDK workspace</title>
 </head>
+
 <body>
-<button class="open-button" onclick="onPasswordGet()">Set Password</button>
+    <button class="open-button" id="myPasswordFormBtn">Set Password</button>
 
-<button class="open-button" onclick="onSignForm()">Sign</button>
+    <button class="open-button" id="mySignatureFormBtn">Sign</button>
 
-<button class="open-button" onclick="onSigned()">Show Signature informations</button>
+    <button class="open-button" id="mySignatureInfosBtn">Show Signature informations</button>
 
-<!-- Password Form -->
-<div class="form-popup" id="myPasswordForm">
-    <div id="message">
-        <h3>Password must contain the following:</h3>
-        <p id="letter" class="invalid">A <b>lowercase</b> letter</p>
-        <p id="capital" class="invalid">A <b>capital (uppercase)</b> letter</p>
-        <p id="number" class="invalid">A <b>number</b></p>
-        <p id="length" class="invalid">Minimum <b>8 characters</b></p>
-        <p id="matching" class="invalid">Identiques </b></p>
+    <!-- Password Form -->
+    <div class="form-popup" id="myPasswordFormDiv">
+        <div id="message">
+            <h3>Password must contain the following:</h3>
+            <p id="letter" class="invalid">A <b>lowercase</b> letter</p>
+            <p id="capital" class="invalid">A <b>capital (uppercase)</b> letter</p>
+            <p id="number" class="invalid">A <b>number</b></p>
+            <p id="length" class="invalid">Minimum <b>8 characters</b></p>
+            <p id="matching" class="invalid">Identiques </b></p>
+        </div>
+        <form class="form-container" id="myPasswordForm">
+            <h1>Password</h1>
+
+            <label for="password"><b>Password</b></label>
+            <input type="password" placeholder="Enter Password" id="password">
+
+            <label for="confirm_password"><b>Confirm password</b></label>
+            <input type="password" placeholder="Enter Password" id="confirm_password" onkeyup='check();'
+                pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}">
+            <span id='message-span'></span>
+            <button type="submit" class="btn" id="submit" >Validate</button>
+            <button type="button" class="btn cancel" id="closePwdForm">Close</button>
+        </form>
     </div>
-    <form class="form-container">
-        <h1>Password</h1>
 
-        <label for="password"><b>Password</b></label>
-        <input type="password" placeholder="Enter Password" id="password">
-
-        <label for="confirm_password"><b>Confirm password</b></label>
-        <input type="password" placeholder="Enter Password" id="confirm_password"
-               onkeyup='check();' pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}">
-        <span id='message-span'></span>
-        <button type="button" class="btn" id="submit" onclick="getFormValue()">Validate</button>
-        <button type="button" class="btn cancel" onclick="closeForm('myPasswordForm')">Close</button>
-    </form>
-</div>
-
-<!-- Signature Form -->
-<div class="form-popup" id="mySignatureForm">
-    <div id="proofContent">
-        <p id="proofName"></p>
-        <p id="proofDesc"></p>
+    <!-- Signature Form -->
+    <div class="form-popup" id="mySignatureFormDiv">
+        <div id="proofContent">
+            <p id="proofName"></p>
+            <p id="proofDesc"></p>
+        </div>
+        <form class="form-container" id="mySignatureForm">
+            <button type="submit" class="btn" id="sign">Sign</button>
+            <button type="button" class="btn cancel" id="closeSignatureForm">Discard</button>
+        </form>
     </div>
-    <form class="form-container">
-        <button type="button" class="btn" id="sign" onclick="signProof()">Sign</button>
-        <button type="button" class="btn cancel" onclick="closeForm('mySignatureForm')">Discard</button>
-    </form>
-</div>
 
-<!-- Signature informations -->
+    <!-- Signature informations -->
 
-<div class="form-popup" id="mySignatureInfos">
-    <div id="proofContentInfos">
-        <p id="proofNameInfos"></p>
-        <p id="proofDescInfos"></p>
-        <br>
-        <p id="signatureState"></p>
+    <div class="form-popup" id="mySignatureInfos">
+        <div id="proofContentInfos">
+            <p id="proofNameInfos"></p>
+            <p id="proofDescInfos"></p>
+            <br>
+            <p id="signatureState"></p>
+        </div>
+        <form class="form-container">
+            <button type="button" class="btn" id="closeInfosForm">OK</button>
+        </form>
     </div>
-    <form class="form-container">
-        <button type="button" class="btn" onclick="closeForm('mySignatureInfos')">OK</button>
-    </form>
-</div>
 
+    <!-- <script src="contriBox.sdk-v0.js"></script> -->
+    <script src="contriBox.sdk-v0.js"></script>
+    <!-- <script src="contriboxDOM.js"></script> -->
+    <script type="module" src="main.js"></script>
 
-<script src="contriBox.sdk-v0.configure.js"></script>
-<script src="contriBox.sdk-v0.js"></script>
-<script src="contribox.js"></script>
+    <!-- <script src="script.js"></script> -->
 </body>
+
 </html>

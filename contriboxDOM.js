@@ -1,19 +1,23 @@
-let formId = 'myPasswordForm';
 
-const onPasswordGet = () => {
-    window[fnName]();
+const passwordFormDivId = 'myPasswordFormDiv';
+const signatureFormId = 'mySignatureFormDiv';
+const signatureInfosId = 'mySignatureInfos';
+
+function onPasswordGet() {
+    
+    check();
 }
 
-function passwordGet() {
+const openForm = (formId) => {
     document.getElementById(formId).style.display = "block";
     check();
 }
 
-function closeForm(formId) {
+const closeForm = (formId) => {
     document.getElementById(formId).style.display = "none";
 }
 
-let check = function () {
+const check = function () {
 
     let myPassword = document.getElementById("password");
     let myPasswordConfirm = document.getElementById("confirm_password");
@@ -24,12 +28,12 @@ let check = function () {
     let matching = document.getElementById("matching");
 
 
-// When the user starts to type something inside the password field
-    myPassword.onkeyup = function() {
-        console.log("hehre")
+    // When the user starts to type something inside the password field
+    myPassword.onkeyup = function () {
+     
         // Validate lowercase letters
         let lowerCaseLetters = /[a-z]/g;
-        if(myPassword.value.match(lowerCaseLetters)) {
+        if (myPassword.value.match(lowerCaseLetters)) {
             letter.classList.remove("invalid");
             letter.classList.add("valid");
         } else {
@@ -39,7 +43,7 @@ let check = function () {
 
         // Validate capital letters
         let upperCaseLetters = /[A-Z]/g;
-        if(myPassword.value.match(upperCaseLetters)) {
+        if (myPassword.value.match(upperCaseLetters)) {
             capital.classList.remove("invalid");
             capital.classList.add("valid");
         } else {
@@ -49,7 +53,7 @@ let check = function () {
 
         // Validate numbers
         let numbers = /[0-9]/g;
-        if(myPassword.value.match(numbers)) {
+        if (myPassword.value.match(numbers)) {
             number.classList.remove("invalid");
             number.classList.add("valid");
         } else {
@@ -58,7 +62,7 @@ let check = function () {
         }
 
         // Validate length
-        if(myPassword.value.length >= 8) {
+        if (myPassword.value.length >= 8) {
             length.classList.remove("invalid");
             length.classList.add("valid");
         } else {
@@ -66,26 +70,18 @@ let check = function () {
             length.classList.add("invalid");
         }
     }
-    
-    myPasswordConfirm.onkeyup = function() {
+
+    myPasswordConfirm.onkeyup = function () {
         if (myPassword.value == myPasswordConfirm.value) {
             matching.classList.remove("invalid");
             matching.classList.add("valid");
         } else {
             matching.classList.remove("valid");
             matching.classList.add("invalid");
-        } 
+        }
     }
 
-    
-}
 
-const getFormValue = function() {
-    let password = document.getElementById("password").value;
-    console.log(`Password = ${password}`);
-    closeForm();
-    // Set the password
-    // contribox.sdk.passwordSet(password)
 }
 
 // Sign function
@@ -99,8 +95,8 @@ const signProof = () => {
     // return the signature boolean to SDK
 }
 
-function signForm(proofParam) {
-    document.getElementById("mySignatureForm").style.display = "block";
+const signForm = (proofParam) => {
+    document.getElementById(signatureFormId).style.display = "block";
     document.getElementById('proofName').innerHTML = proofParam.projectName;
     document.getElementById('proofDesc').innerHTML = proofParam.description;
     //console.log(proofParam);
@@ -111,7 +107,7 @@ const onSigned = () => {
     signed(proof2, state);
 }
 
-let signed = function(proofParam, state) {
+const signed = function (proofParam, state) {
     document.getElementById('mySignatureInfos').style.display = "block";
     document.getElementById('proofNameInfos').innerHTML = proofParam.projectName;
     document.getElementById('proofDescInfos').innerHTML = proofParam.description;
@@ -122,11 +118,8 @@ let signed = function(proofParam, state) {
     }
 }
 
-window.addEventListener("load", function(event) {
-    console.log("Toutes les ressources sont chargées !");
-    
-});
-
+// export { onPasswordGet, passwordGet, closeForm, check, onSignForm, signProof, signForm, onSigned, signed }
+export { openForm, closeForm, signForm, passwordFormDivId, signatureFormId, signatureInfosId }
 
 
 
