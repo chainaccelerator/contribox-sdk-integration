@@ -43,6 +43,7 @@ document.getElementById("myPasswordForm").addEventListener('submit', (e) => {
   // Set the password with SDK
   // contribox.sdk.passwordSet(password)
   console.log(_wally_init());
+  
 })
 
 // Signing or rejecting the signature
