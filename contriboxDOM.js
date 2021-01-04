@@ -119,7 +119,11 @@ const signed = function (proofParam, state) {
 }
 
 // export { onPasswordGet, passwordGet, closeForm, check, onSignForm, signProof, signForm, onSigned, signed }
+<<<<<<< HEAD
 export { openForm, closeForm, signForm, passwordFormDivId, signatureFormId, signatureInfosId }
+=======
+export { openForm, closeForm, signForm, signed, passwordFormDivId, signatureFormId, signatureInfosId }
+>>>>>>> wasm_integration
 
 
 

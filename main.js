@@ -1,9 +1,10 @@
 import { getEntropy } from "./contribox.lib.js";
 import * as domLib from "./contriboxDOM.js";
-import { proof1, proof2, fnName } from "./contriBox.sdk-v0.configure.js";
+import { proof1, proof2, fnName, state } from "./contriBox.sdk-v0.configure.js";
 
 
 /* Forms */
+
 let myPasswordFormBtn = document.getElementById('myPasswordFormBtn');
 myPasswordFormBtn.addEventListener('click', () => {
   domLib.openForm(domLib.passwordFormDivId);
@@ -13,9 +14,11 @@ mySignatureFormBtn.addEventListener('click', () => {
   // domLib.openForm(domLib.signatureFormId);
   domLib.signForm(proof1);
 });
+
 let mySignatureInfosBtn = document.getElementById('mySignatureInfosBtn');
 mySignatureInfosBtn.addEventListener('click', () => {
   domLib.openForm(domLib.signatureInfosId);
+  domLib.signed(proof2, state);
 });
 
 let myClosePasswordFormBtn = document.getElementById('closePwdForm');
@@ -39,6 +42,7 @@ document.getElementById("myPasswordForm").addEventListener('submit', (e) => {
   domLib.closeForm(domLib.passwordFormDivId);
   // Set the password with SDK
   // contribox.sdk.passwordSet(password)
+  console.log(_wally_init());
   
 })
 
@@ -53,6 +57,11 @@ document.getElementById("mySignatureForm").addEventListener('submit', (e) => {
   domLib.closeForm(domLib.signatureFormId);
 
 })
+
+Module.onRuntimeInitialized = () => {
+  console.log('Loaded! ');
+  console.log(_wally_init());
+};
 
 
 
