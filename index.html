@@ -12,11 +12,11 @@
 </head>
 
 <body>
-    <button class="open-button" id="myPasswordFormBtn">Set Password</button>
+    <button class="open-button" id="myPasswordFormBtnId">Set Password</button>
 
-    <button class="open-button" id="mySignatureFormBtn">Sign</button>
+    <button class="open-button" id="mySignatureFormBtnId">Sign</button>
 
-    <button class="open-button" id="mySignatureInfosBtn">Show Signature informations</button>
+    <button class="open-button" id="mySignatureInfosBtnId">Show Signature informations</button>
 
     <!-- Password Form -->
     <div class="form-popup" id="myPasswordFormDiv">
@@ -31,15 +31,15 @@
         <form class="form-container" id="myPasswordForm">
             <h1>Password</h1>
 
-            <label for="password"><b>Password</b></label>
+            <label for="password"><b>Password Azerty2020</b></label>
             <input type="password" placeholder="Enter Password" id="password">
 
             <label for="confirm_password"><b>Confirm password</b></label>
             <input type="password" placeholder="Enter Password" id="confirm_password" onkeyup='check();'
                 pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}">
             <span id='message-span'></span>
-            <button type="submit" class="btn" id="submit" >Validate</button>
-            <button type="button" class="btn cancel" id="closePwdForm">Close</button>
+            <button type="submit" class="btn" id="submit">Validate</button>
+            <button type="button" class="btn cancel" id="closePwdForm" class="closeForm">Close</button>
         </form>
     </div>
 
@@ -51,13 +51,13 @@
         </div>
         <form class="form-container" id="mySignatureForm">
             <button type="submit" class="btn" id="sign">Sign</button>
-            <button type="button" class="btn cancel" id="closeSignatureForm">Discard</button>
+            <button type="button" class="btn cancel" id="closeSignatureForm" class="closeForm">Discard</button>
         </form>
     </div>
 
     <!-- Signature informations -->
 
-    <div class="form-popup" id="mySignatureInfos">
+    <div class="form-popup" id="mySignatureInfosDiv">
         <div id="proofContentInfos">
             <p id="proofNameInfos"></p>
             <p id="proofDescInfos"></p>
@@ -65,16 +65,20 @@
             <p id="signatureState"></p>
         </div>
         <form class="form-container">
-            <button type="button" class="btn" id="closeInfosForm">OK</button>
+            <button type="button" class="btn" id="closeInfosForm" class="closeForm">OK</button>
         </form>
     </div>
 
-    <!-- <script src="contriBox.sdk-v0.js"></script> -->
-    <script src="contriBox.sdk-v0.js"></script>
-    <script src="./bin/contribox.js"></script>
-    <script type="module" src="main.js"></script>
 
+    <script async src="./bin/contribox.js"></script>
+    <script async type="text/javascript" src="contriBox.sdk-v0.configure.js"></script>
+    <script async type="text/javascript" src="contriboxDOM.js"></script>
+    <script async type='text/javascript' src='walletMain.js'></script>
+    <script defer type='text/javascript' src="main.js"></script>
     <!-- <script src="script.js"></script> -->
+<script>
+  
+</script>
 </body>
 
 </html>

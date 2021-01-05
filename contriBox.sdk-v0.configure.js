@@ -1,5 +1,5 @@
 // Function name to invoke
-export const fnName = "passwordGet";
+const fnName = "passwordGet";
 
 // mettre les structures
 class Proof {
@@ -9,8 +9,8 @@ class Proof {
     }
 }
 
-export const proof1 = new Proof('Proof 1 :::','Description de Proof 1 !!!');
-export const proof2 = new Proof('Proof 2','Description de Proof 2 !!!');
+const proof1 = new Proof('Proof 1 :::', 'Description de Proof 1 !!!');
+const proof2 = new Proof('Proof 2', 'Description de Proof 2 !!!');
 
 
-export const state = true;
+const state = true;

@@ -1,16 +1,20 @@
+// import { proof1, proof2, fnName, state } from "./contriBox.sdk-v0.configure.js";
 
+const passwordFormBtnId = 'myPasswordFormBtnId';
+const signatureFormBtnId = 'mySignatureFormBtnId';
+const signatureInfosBtnId = 'mySignatureInfosBtnId';
 const passwordFormDivId = 'myPasswordFormDiv';
-const signatureFormId = 'mySignatureFormDiv';
-const signatureInfosId = 'mySignatureInfos';
+const signatureFormDivId = 'mySignatureFormDiv';
+const signatureInfosDivId = 'mySignatureInfosDiv';
+const passwordForm = 'myPasswordForm';
+const signatureForm = 'mySignatureForm';
 
-function onPasswordGet() {
-    
-    check();
-}
 
 const openForm = (formId) => {
     document.getElementById(formId).style.display = "block";
-    check();
+    if (formId === passwordFormDivId) {
+        check();
+    }
 }
 
 const closeForm = (formId) => {
@@ -30,7 +34,7 @@ const check = function () {
 
     // When the user starts to type something inside the password field
     myPassword.onkeyup = function () {
-     
+
         // Validate lowercase letters
         let lowerCaseLetters = /[a-z]/g;
         if (myPassword.value.match(lowerCaseLetters)) {
@@ -84,31 +88,12 @@ const check = function () {
 
 }
 
-// Sign function
-const onSignForm = () => {
-    signForm(proof1);
-}
-
-const signProof = () => {
-    let signature = true;
-    console.log(signature);
-    // return the signature boolean to SDK
-}
-
-const signForm = (proofParam) => {
-    document.getElementById(signatureFormId).style.display = "block";
+const fillSignForm = (proofParam) => {
     document.getElementById('proofName').innerHTML = proofParam.projectName;
     document.getElementById('proofDesc').innerHTML = proofParam.description;
-    //console.log(proofParam);
 }
 
-// Signed popup
-const onSigned = () => {
-    signed(proof2, state);
-}
-
-const signed = function (proofParam, state) {
-    document.getElementById('mySignatureInfos').style.display = "block";
+const fillSignedForm = function (proofParam, state) {
     document.getElementById('proofNameInfos').innerHTML = proofParam.projectName;
     document.getElementById('proofDescInfos').innerHTML = proofParam.description;
     if (state) {
@@ -118,8 +103,70 @@ const signed = function (proofParam, state) {
     }
 }
 
-// export { onPasswordGet, passwordGet, closeForm, check, onSignForm, signProof, signForm, onSigned, signed }
-export { openForm, closeForm, signForm, signed, passwordFormDivId, signatureFormId, signatureInfosId }
+// Setting up forms (openning, closing forms, and listenning to events)
+let myPasswordFormBtn = document.getElementById(passwordFormBtnId);
+myPasswordFormBtn.addEventListener('click', () => {
+    openForm(passwordFormDivId);
+});
+
+let mySignatureFormBtn = document.getElementById(signatureFormBtnId);
+mySignatureFormBtn.addEventListener('click', () => {
+    openForm(signatureFormDivId);
+    fillSignForm(proof1);
+});
+
+let mySignatureInfosBtn = document.getElementById(signatureInfosBtnId);
+mySignatureInfosBtn.addEventListener('click', () => {
+    openForm(signatureInfosDivId);
+    fillSignedForm(proof2, state);
+});
+
+let myClosePasswordFormBtn = document.getElementById('closePwdForm');
+myClosePasswordFormBtn.addEventListener('click', () => {
+    closeForm(passwordFormDivId);
+});
+let myCloseSignatureFormBtn = document.getElementById('closeSignatureForm');
+myCloseSignatureFormBtn.addEventListener('click', () => {
+    closeForm(signatureFormDivId);
+});
+let myCloseSignatureInfosBtn = document.getElementById('closeInfosForm');
+myCloseSignatureInfosBtn.addEventListener('click', () => {
+    closeForm(signatureInfosDivId);
+});
+
+
+// Getting the password from the DOM and send it to SDK
+document.getElementById(passwordForm).addEventListener('submit', (e) => {
+    e.preventDefault();
+    let password = e.target.elements[0].value;
+    console.log('password: ', password);
+    closeForm(passwordFormDivId);
+    // Set the password with SDK
+    // contribox.sdk.passwordSet(password)
+    // create new wallet with 5 keys 
+    createNewWallet(password);
+
+})
+
+// Signing or rejecting the signature
+document.getElementById(signatureForm).addEventListener('submit', (e) => {
+    e.preventDefault();
+
+    // returns the signature acceptance to the SDK 
+    //which will sign avec contribox.sdk.sign(Proofhash) 
+    // contribox.sdk.integration.sign
+    alert("Signature accepted");
+    closeForm(signatureFormDivId);
+
+})
+
+// export { 
+//     closeForm,
+//     signatureFormDivId,
+//     passwordFormDivId, 
+//     passwordForm, 
+//     signatureForm,
+// }
 
 
 
