@@ -30,15 +30,15 @@
         </div>
         <form class="form-container" id="myPasswordForm">
             <h1>Password</h1>
-
+            <div id="errormessage"></div>
             <label for="password"><b>Password Azerty2020</b></label>
-            <input type="password" placeholder="Enter Password" id="password">
+            <input type="password" placeholder="Enter Password" id="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" onkeyup='checkForm()'>
 
             <label for="confirm_password"><b>Confirm password</b></label>
-            <input type="password" placeholder="Enter Password" id="confirm_password" onkeyup='check();'
+            <input type="password" placeholder="Enter Password" id="confirm_password" onkeyup='checkForm()'
                 pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}">
             <span id='message-span'></span>
-            <button type="submit" class="btn" id="submit">Validate</button>
+            <button type="submit" class="btn" id="submitButton" >Validate</button>
             <button type="button" class="btn cancel" id="closePwdForm" class="closeForm">Close</button>
         </form>
     </div>
@@ -71,6 +71,7 @@
 
 
     <script async src="./bin/contribox.js"></script>
+    <script  src="contriBox.sdk-v0.js"></script>
     <script async type="text/javascript" src="contriBox.sdk-v0.configure.js"></script>
     <script async type="text/javascript" src="contriboxDOM.js"></script>
     <script async type='text/javascript' src='walletMain.js'></script>

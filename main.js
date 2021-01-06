@@ -10,7 +10,7 @@ const contriboxJson = {
 
 let userPassword = '';
 
-function main() {
+function testLibWally() {
     if (init() !== 0) {
         alert("initialization failed");
         return;
@@ -44,9 +44,11 @@ function createNewWallet(password) {
     contriboxJson.lock = lock;
     contriboxJson.witness = witness;
     localStorage.setItem('contriboxJson', JSON.stringify(contriboxJson));
-    console.log('json: ', JSON.stringify(contriboxJson));
+    // console.log('json: ', JSON.stringify(contriboxJson));
     
     console.log(localStorage.getItem('contriboxJson'));
+
+    // appels vers les endpoints KeySharexxxx
 
 }
 
@@ -58,9 +60,20 @@ function passwordGet() {
     openForm(passwordFormDivId);
 }
 
+function setWallet(password) {
+    console.log('In setPassword: ', password);
+    // check if contriboxJson object exists in LocalStorage ?
+    if(!localStorage.getItem('contriboxJson')) {
+        createNewWallet(password);
+    } else {
+        console.log('found');        
+    }
+}
+
 var Module = {
     onRuntimeInitialized: function () {
-        // main();
+        // testLibWally();
+        localStorage.clear();
         console.log('pass:', userPassword);
         console.log(localStorage.getItem('contriboxJson'));
 

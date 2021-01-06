@@ -60,6 +60,10 @@ body {font-family: Arial, Helvetica, sans-serif;}
   opacity: 0.8;
 }
 
+.form-container button:disabled {
+  background-color: grey;
+}
+
 /* Add a red background color to the cancel button */
 .form-container .cancel {
   background-color: red;

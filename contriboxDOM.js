@@ -9,20 +9,30 @@ const signatureInfosDivId = 'mySignatureInfosDiv';
 const passwordForm = 'myPasswordForm';
 const signatureForm = 'mySignatureForm';
 
-
 const openForm = (formId) => {
     document.getElementById(formId).style.display = "block";
-    if (formId === passwordFormDivId) {
-        check();
-    }
+    // if (formId === passwordFormDivId) {
+    //     checkForm();
+    // }
 }
 
 const closeForm = (formId) => {
     document.getElementById(formId).style.display = "none";
 }
 
-const check = function () {
+const validateForm = (password, confirmPassword) => {
+    canSubmit = true;
+    let strongRegex = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.{8,})");
 
+
+    if (!(strongRegex.test(password) && password === confirmPassword)) {
+        canSubmit = false;
+    }
+
+    document.getElementById('submitButton').disabled = !canSubmit;
+}
+
+const checkForm = () => {
     let myPassword = document.getElementById("password");
     let myPasswordConfirm = document.getElementById("confirm_password");
     let letter = document.getElementById("letter");
@@ -31,10 +41,10 @@ const check = function () {
     let length = document.getElementById("length");
     let matching = document.getElementById("matching");
 
-
+    validateForm(myPassword.value, myPasswordConfirm.value);
     // When the user starts to type something inside the password field
     myPassword.onkeyup = function () {
-
+        validateForm(myPassword.value, myPasswordConfirm.value);
         // Validate lowercase letters
         let lowerCaseLetters = /[a-z]/g;
         if (myPassword.value.match(lowerCaseLetters)) {
@@ -76,6 +86,7 @@ const check = function () {
     }
 
     myPasswordConfirm.onkeyup = function () {
+        validateForm(myPassword.value, myPasswordConfirm.value);
         if (myPassword.value == myPasswordConfirm.value) {
             matching.classList.remove("invalid");
             matching.classList.add("valid");
@@ -84,8 +95,6 @@ const check = function () {
             matching.classList.add("invalid");
         }
     }
-
-
 }
 
 const fillSignForm = (proofParam) => {
@@ -134,19 +143,33 @@ myCloseSignatureInfosBtn.addEventListener('click', () => {
     closeForm(signatureInfosDivId);
 });
 
+function jsEscape(str) {
+    return String(str).replace(/[^\w. ]/gi, function (c) {
+        return '\\u' + ('0000' + c.charCodeAt(0).toString(16)).slice(-4);
+    });
+
+}
+
+function htmlEncode(str) {
+    return String(str).replace(/[^\w. ]/gi, function (c) {
+        return '&#' + c.charCodeAt(0) + ';';
+    });
+}
 
 // Getting the password from the DOM and send it to SDK
 document.getElementById(passwordForm).addEventListener('submit', (e) => {
     e.preventDefault();
     let password = e.target.elements[0].value;
     console.log('password: ', password);
-    closeForm(passwordFormDivId);
+    console.log('escaped pwd: ', htmlEncode(password));
+
     // Set the password with SDK
     // contribox.sdk.passwordSet(password)
-    // create new wallet with 5 keys 
-    createNewWallet(password);
 
-})
+    // check if contriboxJson exists in localStorage before creating it
+    // create new wallet with 4 keys 
+    setWallet(password);
+});
 
 // Signing or rejecting the signature
 document.getElementById(signatureForm).addEventListener('submit', (e) => {
